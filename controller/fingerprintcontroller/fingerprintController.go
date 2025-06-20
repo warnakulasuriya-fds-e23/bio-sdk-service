@@ -38,3 +38,6 @@ func NewFingerprintController() *fingerprintController {
 func (controller *fingerprintController) GetStatus(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, "runnig")
 }
+func (controller *fingerprintController) MatchTemplates(c *gin.Context) {
+	controller.matchTemplates(c)
+}
