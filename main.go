@@ -13,5 +13,6 @@ func main() {
 
 	router.GET("/api/test", controller.GiveTestResponse)
 	router.GET("/api/fingerprint", finController.GetStatus)
+	router.POST("/api/fingerprint/match", finController.MatchTemplates)
 	router.Run("localhost:4000")
 }

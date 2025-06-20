@@ -6,11 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/requestobjects"
-)
-
-const (
-	matchTemplatesPositiveResponse = "match"
-	matchTemplatesNegativeResponse = "no match"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/responseobjects"
 )
 
 func (controller *fingerprintController) matchTemplates(c *gin.Context) {
@@ -22,10 +18,11 @@ func (controller *fingerprintController) matchTemplates(c *gin.Context) {
 	probeTemplate := controller.sdk.ParseByteArrayToTemplate(&reqObj.ProbeCbor)
 	candidateTemplate := controller.sdk.ParseByteArrayToTemplate(&reqObj.CandidateCbor)
 	isMatch := controller.sdk.Match(probeTemplate, candidateTemplate)
-
 	if isMatch {
-		c.IndentedJSON(http.StatusOK, matchTemplatesPositiveResponse)
+		res := responseobjects.MatchTemplatesResObj{Status: "match"}
+		c.IndentedJSON(http.StatusOK, res)
 	} else {
-		c.IndentedJSON(http.StatusOK, matchTemplatesNegativeResponse)
+		res := responseobjects.MatchTemplatesResObj{Status: "no match"}
+		c.IndentedJSON(http.StatusOK, res)
 	}
 }
