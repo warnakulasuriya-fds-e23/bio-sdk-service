@@ -16,7 +16,10 @@ func (controller *galleryController) UpdateImagesDir(c *gin.Context) {
 	controller.updateImagesDir(c)
 }
 
-// func (controller *galleryController) UpdateCborDir(c gin.Context)        {}
+func (controller *galleryController) UpdateCborDir(c *gin.Context) {
+	controller.updateCborDir(c)
+}
+
 // func (controller *galleryController) LoadImages(c gin.Context)           {}
 // func (controller *galleryController) LoadCborFiles(c gin.Context)        {}
 // func (controller *galleryController) SaveGalleryToCborDir(c gin.Context) {}

@@ -8,18 +8,19 @@ import (
 	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/responseobjects"
 )
 
-func (controller *galleryController) updateImagesDir(c *gin.Context) {
-	var reqObj requestobjects.UpdateImagesDirReqObj
+func (controller *galleryController) updateCborDir(c *gin.Context) {
+	var reqObj requestobjects.UpdateCborDirReqObj
 	err := c.BindJSON(&reqObj)
 	if err != nil {
 		resObj := responseobjects.ErrorResObj{Message: err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
 	}
-	message, err := controller.sdk.UpdateImageDir(reqObj.PathString)
+	message, err := controller.sdk.UpdateCborDir(reqObj.PathString)
 	if err != nil {
 		resObj := responseobjects.ErrorResObj{Message: err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
 	}
-	resObj := responseobjects.UpdateImagesDirResObj{Message: message}
-	c.IndentedJSON(http.StatusInternalServerError, resObj)
+	resObj := responseobjects.UpdateCborDirResObj{Message: message}
+	c.IndentedJSON(http.StatusOK, resObj)
+
 }

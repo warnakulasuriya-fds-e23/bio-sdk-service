@@ -17,6 +17,7 @@ func main() {
 	router.GET("/api/test", controller.GiveTestResponse)
 
 	router.GET("/api/gallery/update-images-dir", galController.UpdateImagesDir)
+	router.GET("/api/gallery/update-cbor-dir", galController.UpdateCborDir)
 
 	router.GET("/api/fingerprint", finController.GetStatus)
 	router.POST("/api/fingerprint/match", finController.MatchTemplates)
