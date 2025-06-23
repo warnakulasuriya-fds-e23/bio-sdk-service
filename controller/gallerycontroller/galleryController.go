@@ -1,8 +1,6 @@
 package gallerycontroller
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/warnakulasuriya-fds-e23/fingerprint-go-sdk/core"
 )
@@ -15,7 +13,7 @@ func NewGalleryController(sdkptr *core.SDKCore) *galleryController {
 	return &galleryController{sdk: sdkptr}
 }
 func (controller *galleryController) UpdateImagesDir(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, "update")
+	controller.updateImagesDir(c)
 }
 
 // func (controller *galleryController) UpdateCborDir(c gin.Context)        {}
