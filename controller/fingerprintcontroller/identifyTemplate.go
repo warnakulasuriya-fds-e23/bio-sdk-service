@@ -1,7 +1,6 @@
 package fingerprintcontroller
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,8 +12,11 @@ func (controller *fingerprintController) identifyTemplate(c *gin.Context) {
 	var reqObj requestobjects.IdentifyTemplateReqObj
 	err := c.BindJSON(&reqObj)
 	if err != nil {
-		log.Fatal(err.Error())
+		res := responseobjects.ErrorResObj{Message: err.Error()}
+		c.IndentedJSON(http.StatusInternalServerError, res)
 	}
+
+	// TODO: Add more error handling to sdk methods
 	probeTemplate := controller.sdk.ParseByteArrayToTemplate(&reqObj.ProbeCbor)
 	isMatched, discoveredId := controller.sdk.Identify(probeTemplate)
 	resObj := responseobjects.IdentifyTemplateResObje{
