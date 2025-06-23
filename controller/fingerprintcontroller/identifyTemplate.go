@@ -12,8 +12,8 @@ func (controller *fingerprintController) identifyTemplate(c *gin.Context) {
 	var reqObj requestobjects.IdentifyTemplateReqObj
 	err := c.BindJSON(&reqObj)
 	if err != nil {
-		res := responseobjects.ErrorResObj{Message: err.Error()}
-		c.IndentedJSON(http.StatusInternalServerError, res)
+		resObj := responseobjects.ErrorResObj{Message: err.Error()}
+		c.IndentedJSON(http.StatusInternalServerError, resObj)
 	}
 
 	// TODO: Add more error handling to sdk methods

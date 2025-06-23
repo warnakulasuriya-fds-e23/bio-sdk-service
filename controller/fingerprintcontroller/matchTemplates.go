@@ -12,13 +12,13 @@ func (controller *fingerprintController) matchTemplates(c *gin.Context) {
 	var reqObj requestobjects.MatchTemplatesReqObj
 	err := c.BindJSON(&reqObj)
 	if err != nil {
-		res := responseobjects.ErrorResObj{Message: err.Error()}
-		c.IndentedJSON(http.StatusInternalServerError, res)
+		resObj := responseobjects.ErrorResObj{Message: err.Error()}
+		c.IndentedJSON(http.StatusInternalServerError, resObj)
 	}
 	// TODO: Add more error handling to sdk methods
 	probeTemplate := controller.sdk.ParseByteArrayToTemplate(&reqObj.ProbeCbor)
 	candidateTemplate := controller.sdk.ParseByteArrayToTemplate(&reqObj.CandidateCbor)
 	isMatch := controller.sdk.Match(probeTemplate, candidateTemplate)
-	res := responseobjects.MatchTemplatesResObj{IsMatch: isMatch}
-	c.IndentedJSON(http.StatusOK, res)
+	resObj := responseobjects.MatchTemplatesResObj{IsMatch: isMatch}
+	c.IndentedJSON(http.StatusOK, resObj)
 }
