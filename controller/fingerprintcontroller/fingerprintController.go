@@ -42,5 +42,5 @@ func (controller *fingerprintController) MatchTemplates(c *gin.Context) {
 	controller.matchTemplates(c)
 }
 func (controller *fingerprintController) IdentifyTemplate(c *gin.Context) {
-
+	controller.identifyTemplate(c)
 }
