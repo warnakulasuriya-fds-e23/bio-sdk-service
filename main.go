@@ -16,9 +16,11 @@ func main() {
 	galController := gallerycontroller.NewGalleryController(sdkptr)
 	router.GET("/api/test", controller.GiveTestResponse)
 
-	router.GET("/api/gallery/update-images-dir", galController.UpdateImagesDir)
-	router.GET("/api/gallery/update-cbor-dir", galController.UpdateCborDir)
+	router.POST("/api/gallery/update-images-dir", galController.UpdateImagesDir)
+	router.POST("/api/gallery/update-cbor-dir", galController.UpdateCborDir)
 	router.GET("/api/gallery/load-images", galController.LoadImages)
+	router.GET("/api/gallery/load-cbor-files", galController.LoadCborFiles)
+	router.GET("/api/gallery/save-gallery", galController.SaveGalleryToCborDir)
 
 	router.GET("/api/fingerprint", finController.GetStatus)
 	router.POST("/api/fingerprint/match", finController.MatchTemplates)

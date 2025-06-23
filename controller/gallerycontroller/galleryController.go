@@ -24,5 +24,9 @@ func (controller *galleryController) LoadImages(c *gin.Context) {
 	controller.loadImages(c)
 }
 
-// func (controller *galleryController) LoadCborFiles(c gin.Context)        {}
-// func (controller *galleryController) SaveGalleryToCborDir(c gin.Context) {}
+func (controller *galleryController) LoadCborFiles(c *gin.Context) {
+	controller.loadCborFiles(c)
+}
+func (controller *galleryController) SaveGalleryToCborDir(c *gin.Context) {
+	controller.saveGalleryToCborDir(c)
+}
