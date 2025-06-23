@@ -19,11 +19,6 @@ func (controller *fingerprintController) matchTemplates(c *gin.Context) {
 	probeTemplate := controller.sdk.ParseByteArrayToTemplate(&reqObj.ProbeCbor)
 	candidateTemplate := controller.sdk.ParseByteArrayToTemplate(&reqObj.CandidateCbor)
 	isMatch := controller.sdk.Match(probeTemplate, candidateTemplate)
-	if isMatch {
-		res := responseobjects.MatchTemplatesResObj{Status: "match"}
-		c.IndentedJSON(http.StatusOK, res)
-	} else {
-		res := responseobjects.MatchTemplatesResObj{Status: "no match"}
-		c.IndentedJSON(http.StatusOK, res)
-	}
+	res := responseobjects.MatchTemplatesResObj{IsMatch: isMatch}
+	c.IndentedJSON(http.StatusOK, res)
 }
