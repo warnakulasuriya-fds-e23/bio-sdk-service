@@ -25,3 +25,6 @@ func (controller *fingerprintController) MatchTemplates(c *gin.Context) {
 func (controller *fingerprintController) IdentifyTemplate(c *gin.Context) {
 	controller.identifyTemplate(c)
 }
+func (controller *fingerprintController) EnrollTemplate(c *gin.Context) {
+	controller.enrollTemplate(c)
+}

@@ -7,6 +7,8 @@ tags:
     description: Related to the imagesDir property of SDKCore
   - name: cbor-dir
     description: Related to the cborDir property of SDKCore
+  - name: fingerprint-core
+    description: Related to the core fingerprint related functionalities offered by the SDKCore
 paths:
   /api/gallery/get-images-dir:
     get:
@@ -96,6 +98,35 @@ paths:
                 type: string
       deprecated: false
       security: []
+
+  /api/fingerprint/enroll:
+    post:
+      summary: to enroll a new fingerprint template
+      operationId: enrolltemplate
+      description: given a cbor type of data object and the relevant id it will parse the cbor data get the template and append it to the gallery
+      tags:
+        - fingerprint-core
+      requestBody:
+        description: Contains the cbor data and the id
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.enrollTemplateReqObj'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []
 components:
   securitySchemes:
     default:
@@ -118,4 +149,13 @@ components:
         pathstring:
           type: string
           example: /app/cbordir/
+    models.enrollTemplateReqObj:
+      type: object
+      properties:
+        data:
+          type: string
+          example: 101101001010101010110101001
+        id:
+          type: string
+          examlpe: testuser1
     
