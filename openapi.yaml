@@ -2,10 +2,16 @@ openapi: 3.0.1
 info:
   title: Biometric Orchestration Server
   version: 1.0.0
+tags:
+  - name: images-dir
+    description: Related to the imagesDir property of SDKCore
+  - name: cbor-dir
+    description: Related to the cborDir property of SDKCore
 paths:
   /api/gallery/get-images-dir:
     get:
       summary: get the current configured images directory
+      operationId: getImagesDir
       description: images directory property within the SDKCore is returned
       tags:
         - images-dir
@@ -21,6 +27,7 @@ paths:
   /api/gallery/get-cbor-dir:
     get:
       summary: get the current configured cbor directory
+      operationId: getCborDir
       description: cbor directory property within the SDKCore is returned
       tags:
         - cbor-dir
@@ -36,6 +43,7 @@ paths:
   /api/gallery/update-images-dir:
     post:
       summary: to update the current images dir
+      operationId: updateImagesDir
       description: does a validation check on the provided path and if valid sets the images directory property of the SDKCore
       tags:
         - images-dir
@@ -44,7 +52,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref:'#/components/schemas/models.updateImagesDirReqObj'
+              $ref: '#/components/schemas/models.updateImagesDirReqObj'
       responses:
         '200':
           description: Successful response
@@ -57,6 +65,7 @@ paths:
   /api/gallery/update-cbor-dir:
     post:
       summary: to update the current cbor dir
+      operationId: updateCborDir
       description: does a validation check on the provided path and if valid sets the cbor directory property of the SDKCore
       tags:
         - cbor-dir
@@ -65,7 +74,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref:'#/components/schemas/models.updateCborDirReqObj'
+              $ref: '#/components/schemas/models.updateCborDirReqObj'
       responses:
         '200':
           description: Successful response
