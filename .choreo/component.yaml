@@ -1,0 +1,15 @@
+schemaVersion: 1.2
+
+endpoints:
+  - name: biometric-orchestration-server
+    displayName: Biometric Orchestration server
+
+    service:
+      basePath: /
+      port: 4000
+
+    type: REST
+
+    networkVisibilities: 
+      - Public
+    schemaFilePath: openapi.yaml

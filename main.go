@@ -16,6 +16,8 @@ func main() {
 	galController := gallerycontroller.NewGalleryController(sdkptr)
 	router.GET("/api/test", controller.GiveTestResponse)
 
+	router.GET("/api/gallery/get-images-dir", galController.GetImagesDir)
+	router.GET("/api/gallery/get-cbor-dir", galController.GetCborDir)
 	router.POST("/api/gallery/update-images-dir", galController.UpdateImagesDir)
 	router.POST("/api/gallery/update-cbor-dir", galController.UpdateCborDir)
 	router.GET("/api/gallery/load-images", galController.LoadImages)

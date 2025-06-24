@@ -1,0 +1,20 @@
+openapi: "3.0.0"
+info:
+  title: Biometric Orchestration Server
+  version: 1.0.0
+paths:
+  /api/gallery/get-images-dir:
+    get:
+      summary: get the current configured images directory
+      description: images directory property within the SDKCore is returned
+      tags:
+        - images-dir
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []
