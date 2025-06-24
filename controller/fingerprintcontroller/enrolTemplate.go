@@ -1,7 +1,10 @@
 package fingerprintcontroller
 
 import (
+	"bytes"
 	"fmt"
+	"io"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,6 +13,17 @@ import (
 )
 
 func (controller *fingerprintController) enrollTemplate(c *gin.Context) {
+	bodyBytes, err1 := io.ReadAll(c.Request.Body)
+	if err1 != nil {
+		log.Printf("Error reading request body: %v", err1)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to read request body"})
+		return
+	}
+	c.Request.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
+
+	requestBodyString := string(bodyBytes)
+	log.Printf("Incoming JSON Request Body: %s\n", requestBodyString)
+
 	var reqObj requestobjects.EnrollTemplateReqObj
 	err := c.BindJSON(&reqObj)
 	if err != nil {

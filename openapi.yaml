@@ -154,7 +154,7 @@ components:
       properties:
         data:
           type: string
-          example: 101101001010101010110101001 #needs a valid cbor format byte array
+          example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u+z/=
         id:
           type: string
           examlpe: testuser1
