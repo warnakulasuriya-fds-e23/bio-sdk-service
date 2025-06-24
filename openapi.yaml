@@ -60,6 +60,12 @@ paths:
             text/plain:
               schema:
                 type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
       deprecated: false
       security: []
   /api/gallery/update-cbor-dir:
@@ -78,6 +84,12 @@ paths:
       responses:
         '200':
           description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
           content:
             text/plain:
               schema:
