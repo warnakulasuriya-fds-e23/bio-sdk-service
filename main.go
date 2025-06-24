@@ -28,5 +28,6 @@ func main() {
 	router.POST("/api/fingerprint/match", finController.MatchTemplates)
 	router.POST("/api/fingerprint/identify", finController.IdentifyTemplate)
 
-	router.Run("localhost:4000")
+	// apparently in following way gin listens for 4000 on all network interfaces
+	router.Run(":4000")
 }
