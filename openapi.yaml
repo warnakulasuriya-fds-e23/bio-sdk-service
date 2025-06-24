@@ -18,3 +18,18 @@ paths:
                 type: string
       deprecated: false
       security: []
+  /api/gallery/get-cbor-dir:
+    get:
+      summary: get the current configured cbor directory
+      description: cbor directory property within the SDKCore is returned
+      tags:
+        - cbor-dir
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []
