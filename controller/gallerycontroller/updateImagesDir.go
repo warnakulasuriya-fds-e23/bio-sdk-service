@@ -13,12 +13,7 @@ func (controller *galleryController) updateImagesDir(c *gin.Context) {
 	var reqObj requestobjects.UpdateImagesDirReqObj
 	err := c.BindJSON(&reqObj)
 	if err != nil {
-		workingDir, errGetwd := os.Getwd()
-		if errGetwd != nil {
-			resObj := responseobjects.ErrorResObj{Message: errGetwd.Error() + " + " + err.Error()}
-			c.IndentedJSON(http.StatusInternalServerError, resObj)
-		}
-		resObj := responseobjects.ErrorResObj{Message: "Current working directory: " + workingDir + " ," + err.Error()}
+		resObj := responseobjects.ErrorResObj{Message: "Error when running BindJSON check response body contents, " + err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
 	}
 	message, err := controller.sdk.UpdateImageDir(reqObj.PathString)

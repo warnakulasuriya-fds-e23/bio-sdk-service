@@ -13,10 +13,9 @@ func (controller *fingerprintController) identifyTemplate(c *gin.Context) {
 	var reqObj requestobjects.IdentifyTemplateReqObj
 	err := c.BindJSON(&reqObj)
 	if err != nil {
-		resObj := responseobjects.ErrorResObj{Message: err.Error()}
+		resObj := responseobjects.ErrorResObj{Message: "Error when running BindJSON check response body contents, " + err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
 	}
-
 	// TODO: Add more error handling to sdk methods
 	probeTemplate, err := controller.sdk.ParseByteArrayToTemplate(&reqObj.ProbeCbor)
 	if err != nil {

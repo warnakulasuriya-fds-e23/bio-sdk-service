@@ -13,7 +13,7 @@ func (controller *fingerprintController) matchTemplates(c *gin.Context) {
 	var reqObj requestobjects.MatchTemplatesReqObj
 	err := c.BindJSON(&reqObj)
 	if err != nil {
-		resObj := responseobjects.ErrorResObj{Message: err.Error()}
+		resObj := responseobjects.ErrorResObj{Message: "Error when running BindJSON check response body contents, " + err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
 	}
 	// TODO: Add more error handling to sdk methods
