@@ -33,3 +33,68 @@ paths:
                 type: string
       deprecated: false
       security: []
+  /api/gallery/update-images-dir:
+    post:
+      summary: to update the current images dir
+      description: does a validation check on the provided path and if valid sets the images directory property of the SDKCore
+      tags:
+        - images-dir
+      requestBody:
+        description: Contains the new path for the images dir
+        content:
+          application/json:
+            schema:
+              $ref:'#/components/schemas/models.updateImagesDirReqObj'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []
+  /api/gallery/update-cbor-dir:
+    post:
+      summary: to update the current cbor dir
+      description: does a validation check on the provided path and if valid sets the cbor directory property of the SDKCore
+      tags:
+        - cbor-dir
+      requestBody:
+        description: Contains the new path for the cbor dir
+        content:
+          application/json:
+            schema:
+              $ref:'#/components/schemas/models.updateCborDirReqObj'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []
+components:
+  securitySchemes:
+    default:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://test.com
+          scopes: 
+            read:books: Grants read access
+  schemas:
+    models.updateImagesDirReqObj:
+      type: object
+      properties:
+        pathstring:
+          type: string
+          example: /app/imagesdir/
+    models.updateCborDirReqObj:
+      type: object
+      properties:
+        pathstring:
+          type: string
+          example: /app/cbordir/
+    
