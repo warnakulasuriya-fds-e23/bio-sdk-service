@@ -82,6 +82,8 @@ github.com/ugorji/go/codec v1.2.12 h1:9LC83zGrHhuUA9l16C9AHXAqEV/2wBQ4nkvumAE65E
 github.com/ugorji/go/codec v1.2.12/go.mod h1:UNopzCgEMSXjBc6AOMqYvWC1ktqTAfzJZUZgYf6w6lg=
 github.com/warnakulasuriya-fds-e23/fingerprint-go-sdk v0.1.1 h1:SLWPXofxwLfVGa1+wOnwqRJRdCrz008BMPbEmxSzI80=
 github.com/warnakulasuriya-fds-e23/fingerprint-go-sdk v0.1.1/go.mod h1:2aa6dqmKG7NG7xsyJ8GNpACgQISYGwGnee+an+1IIRc=
+github.com/warnakulasuriya-fds-e23/fingerprint-go-sdk v0.1.2 h1:6ZY3iu8To1PFbEl0hB14oyVKyGf9B9OKjdoXwvgwmpQ=
+github.com/warnakulasuriya-fds-e23/fingerprint-go-sdk v0.1.2/go.mod h1:2aa6dqmKG7NG7xsyJ8GNpACgQISYGwGnee+an+1IIRc=
 github.com/warnakulasuriya-fds-e23/go-sourceafis-fork v0.0.0-20250620042209-ae068fce65ee h1:zOcVKoeh82c8s/IJyxxMh2eNzA5RPLgc/VaVlqI33T8=
 github.com/warnakulasuriya-fds-e23/go-sourceafis-fork v0.0.0-20250620042209-ae068fce65ee/go.mod h1:9Z/zP/L48DtmjFZymr33jP7nzLmixaiaIPUUu0ik+zk=
 github.com/x448/float16 v0.8.4 h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM=
