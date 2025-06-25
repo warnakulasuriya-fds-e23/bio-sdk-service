@@ -108,7 +108,7 @@ paths:
       tags:
         - images-dir
         - triggers-a-go-routine
-      respsonses:
+      responses:
         '200':
           description: Successful response
           content:
@@ -131,7 +131,7 @@ paths:
       tags:
         - cbor-dir
         - triggers-a-go-routine
-      respsonses:
+      responses:
         '200':
           description: Successful response
           content:
@@ -149,12 +149,12 @@ paths:
   /api/gallery/save-gallery:
     get:
       summary: to trigger the save gallery feature
-      operation: savegallery
+      operationId: savegallery
       description: this triggers the SDKCore SaveGallery method, to run on a go routine, which will convert the templates stored in the gallery to cbor format and save as cbor extension files with filename being the id associated with the template, inside of the cbor dir
       tags:
         - cbor-dir
         - triggers-a-go-routine
-      respsonses:
+      responses:
         '200':
           description: Successful response
           content:
@@ -172,9 +172,9 @@ paths:
   /api/fingerprint:
     get:
       summary: get a status message about fingerprint SDKCore
-      operation: fingerprintStatus
+      operationId: fingerprintStatus
       description: there is a SDKCore GetStatus() method and this will give a string containing some important information about the current sdk instance and the way its configured
-      respsonses:
+      responses:
         '200':
           description: Successful response
           content:
@@ -307,12 +307,12 @@ components:
           format: byte
           example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u+z/=        
     models.identifyTemplateReqObj:
-    type: object
-    properties:
-        probecbor:
-          type: string
-          format: byte
-          example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u+z/=      
+      type: object
+      properties:
+          probecbor:
+            type: string
+            format: byte
+            example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u+z/=      
     models.enrollTemplateReqObj:
       type: object
       properties:
