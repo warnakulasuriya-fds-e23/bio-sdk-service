@@ -9,6 +9,8 @@ tags:
     description: Related to the cborDir property of SDKCore
   - name: fingerprint-core
     description: Related to the core fingerprint related functionalities offered by the SDKCore
+  - name : triggers-a-go-routine
+    description: indicates that a go routine will be started within the orchestration server to run a process seperate from the normal http request response cycle
 paths:
   /api/gallery/get-images-dir:
     get:
@@ -98,12 +100,156 @@ paths:
                 type: string
       deprecated: false
       security: []
-
+  /api/gallery/load-images:
+    get:
+      summary: to trigger the load images feature
+      operationId: loadImages
+      description: this triggers the SDKCore LoadImages() method , to run on a go routine, which load up images from the currently configured images dir , extract templates and append them to the SDKCore gallery
+      tags:
+        - images-dir
+        - triggers-a-go-routine
+      respsonses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []
+  /api/gallery/load-cbor-files:
+    get:
+      summary: to trigger load cbor files feature
+      operationId: loadCbor
+      description: this triggers the SDKCore LoadCborfiles() method , to run on a go routine, which will get templates stored in cbor format in the current cbor dir 
+      tags:
+        - cbor-dir
+        - triggers-a-go-routine
+      respsonses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []                
+  /api/gallery/save-gallery:
+    get:
+      summary: to trigger the save gallery feature
+      operation: savegallery
+      description: this triggers the SDKCore SaveGallery method, to run on a go routine, which will convert the templates stored in the gallery to cbor format and save as cbor extension files with filename being the id associated with the template, inside of the cbor dir
+      tags:
+        - cbor-dir
+        - triggers-a-go-routine
+      respsonses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []    
+  /api/fingerprint:
+    get:
+      summary: get a status message about fingerprint SDKCore
+      operation: fingerprintStatus
+      description: there is a SDKCore GetStatus() method and this will give a string containing some important information about the current sdk instance and the way its configured
+      respsonses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []                
+  /api/fingerprint/match:
+    post:
+      summary: to run the match process between two templates
+      operationId: fingerprintTemplatesMatch
+      description: utilizes the SDKCore Match to compare two provide templates, provided as encoded cbor byte arrays within the request body, and respond with whether they match or not
+      tags:
+        - fingerprint-core
+      requestBody:
+        description: Contains the cbor data of probe template and candidate template, which are fingerprint templates
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.matchTemplatesReqObj'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string              
+      deprecated: false
+      security: []
+  /api/fingerprint/identify:
+    post:
+      summary: to identify a template in a 1 to n manner
+      operationId: fingerprintTemplateIdentify
+      description: utilizes SDKCore Identify() to identify the template provided as an encoded cbor data byte array in the request body, from the templates recorded in the SDKCore Gallery. Responds with whether match was found or not and the discovered id of the matching template
+      tags:
+        - fingerprint-core
+      requestBody:
+        description: Contains the cbor data encoded byte array of the probe template
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.identifyTemplateReqObj'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []                   
   /api/fingerprint/enroll:
     post:
       summary: to enroll a new fingerprint template
-      operationId: enrolltemplate
-      description: given a cbor type of data object and the relevant id it will parse the cbor data get the template and append it to the gallery
+      operationId: fingerprintTemplateEnroll
+      description: given a cbor type of data in request body along with the relevant id in the request body, it will parse the cbor data, get the template and append it to the gallery after running duplication check
       tags:
         - fingerprint-core
       requestBody:
@@ -149,6 +295,24 @@ components:
         pathstring:
           type: string
           example: /app/cbordir/
+    models.matchTemplatesReqObj:
+      type: object
+      properties:
+        probecbor:
+          type: string
+          format: byte
+          example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u+z/=
+        candidatecbor:
+          type: string
+          format: byte
+          example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u+z/=        
+    models.identifyTemplateReqObj:
+    type: object
+    properties:
+        probecbor:
+          type: string
+          format: byte
+          example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u+z/=      
     models.enrollTemplateReqObj:
       type: object
       properties:

@@ -17,7 +17,7 @@ func NewFingerprintController(sdkptr *core.SDKCore) (controller *fingerprintCont
 }
 
 func (controller *fingerprintController) GetStatus(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, "runnig")
+	c.IndentedJSON(http.StatusOK, controller.sdk.GetStaus())
 }
 func (controller *fingerprintController) MatchTemplates(c *gin.Context) {
 	controller.matchTemplates(c)
