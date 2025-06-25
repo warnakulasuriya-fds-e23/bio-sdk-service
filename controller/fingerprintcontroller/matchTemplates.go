@@ -15,6 +15,7 @@ func (controller *fingerprintController) matchTemplates(c *gin.Context) {
 	if err != nil {
 		resObj := responseobjects.ErrorResObj{Message: "Error when running BindJSON check response body contents, " + err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
+		return
 	}
 	// TODO: Add more error handling to sdk methods
 	probeTemplate, err := controller.sdk.ParseByteArrayToTemplate(&reqObj.ProbeCbor)
@@ -22,18 +23,21 @@ func (controller *fingerprintController) matchTemplates(c *gin.Context) {
 		err = fmt.Errorf("error occured when parsing probe byte data: %w", err)
 		resObj := responseobjects.ErrorResObj{Message: err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
+		return
 	}
 	candidateTemplate, err := controller.sdk.ParseByteArrayToTemplate(&reqObj.CandidateCbor)
 	if err != nil {
 		err = fmt.Errorf("error occured when parsing candidate byte data: %w", err)
 		resObj := responseobjects.ErrorResObj{Message: err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
+		return
 	}
 	isMatch, err := controller.sdk.Match(probeTemplate, candidateTemplate)
 	if err != nil {
 		err = fmt.Errorf("error occured when running match method of sdk: %w", err)
 		resObj := responseobjects.ErrorResObj{Message: err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
+		return
 	}
 	resObj := responseobjects.MatchTemplatesResObj{IsMatch: isMatch}
 	c.IndentedJSON(http.StatusOK, resObj)

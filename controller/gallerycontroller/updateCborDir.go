@@ -15,6 +15,7 @@ func (controller *galleryController) updateCborDir(c *gin.Context) {
 	if err != nil {
 		resObj := responseobjects.ErrorResObj{Message: "Error when running BindJSON check response body contents, " + err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
+		return
 	}
 	message, err := controller.sdk.UpdateCborDir(reqObj.PathString)
 	if err != nil {
@@ -22,9 +23,11 @@ func (controller *galleryController) updateCborDir(c *gin.Context) {
 		if errGetwd != nil {
 			resObj := responseobjects.ErrorResObj{Message: errGetwd.Error() + " + " + err.Error()}
 			c.IndentedJSON(http.StatusInternalServerError, resObj)
+			return
 		}
 		resObj := responseobjects.ErrorResObj{Message: "Current working directory: " + workingDir + " ," + err.Error()}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
+		return
 	}
 	resObj := responseobjects.UpdateCborDirResObj{Message: message}
 	c.IndentedJSON(http.StatusOK, resObj)
