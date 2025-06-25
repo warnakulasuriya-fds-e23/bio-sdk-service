@@ -154,8 +154,9 @@ components:
       properties:
         data:
           type: string
-          example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u
+          format: byte
+          example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u+z/=
         id:
           type: string
-          examlpe: testuser1
+          example: testuser1
     
