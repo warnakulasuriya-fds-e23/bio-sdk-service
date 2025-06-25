@@ -154,7 +154,7 @@ components:
       properties:
         data:
           type: string
-          example: "pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u+z/="
+          example: pGVXaWR0aBkBLGZIZWlnaHQZASxoTWludXRpYWWYGaRhWBiMYVkY6GlEaXJlY3Rpb277PMLbXlqTahhVAGkYVgYf2FZGPFpRGlyZWN0aW9u
         id:
           type: string
           examlpe: testuser1
