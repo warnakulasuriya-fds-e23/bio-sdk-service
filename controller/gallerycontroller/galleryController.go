@@ -35,3 +35,6 @@ func (controller *galleryController) LoadCborFiles(c *gin.Context) {
 func (controller *galleryController) SaveGalleryToCborDir(c *gin.Context) {
 	controller.saveGalleryToCborDir(c)
 }
+func (controller *galleryController) UploadCborDirZip(c *gin.Context) {
+	controller.uploadCborZip(c)
+}

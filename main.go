@@ -23,6 +23,7 @@ func main() {
 	router.GET("/api/gallery/load-images", galController.LoadImages)
 	router.GET("/api/gallery/load-cbor-files", galController.LoadCborFiles)
 	router.GET("/api/gallery/save-gallery", galController.SaveGalleryToCborDir)
+	router.POST("/api/gallery/upload-cbor-zip", galController.UploadCborDirZip)
 
 	router.GET("/api/fingerprint", finController.GetStatus)
 	router.POST("/api/fingerprint/match", finController.MatchTemplates)
