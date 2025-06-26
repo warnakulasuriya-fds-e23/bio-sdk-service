@@ -14,8 +14,14 @@ func ConfigTomlReader() configuration.Configuration {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-
-	tomlpath := filepath.Join(workingDir, "config.toml")
+	projEnv := os.Getenv("PROJENV")
+	var tomlpath string
+	//check if in local environment
+	if projEnv == "local" {
+		tomlpath = filepath.Join(workingDir, "config.toml")
+	} else {
+		tomlpath = filepath.Join(workingDir, "deploymentConfig.toml")
+	}
 	var config configuration.Configuration
 	toml.DecodeFile(tomlpath, &config)
 	return config

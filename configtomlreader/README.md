@@ -1,0 +1,1 @@
+if PROJENV environment varaible has been set to "local" then config.toml will be used else deploymentConfig.toml will be used
