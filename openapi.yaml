@@ -3,10 +3,12 @@ info:
   title: Biometric Orchestration Server
   version: 1.0.0
 tags:
+  - name : config-help
+    description: usefull for configuring the server through endpoints if needed
   - name: images-dir
-    description: Related to the imagesDir property of SDKCore
+    description: Related directly or inderictly to the imagesDir property of SDKCore
   - name: cbor-dir
-    description: Related to the cborDir property of SDKCore
+    description: Related directly or inderictly to the cborDir property of SDKCore
   - name: fingerprint-core
     description: Related to the core fingerprint related functionalities offered by the SDKCore
   - name : triggers-a-go-routine
@@ -51,6 +53,7 @@ paths:
       description: does a validation check on the provided path and if valid sets the images directory property of the SDKCore
       tags:
         - images-dir
+        - config-help
       requestBody:
         description: Contains the new path for the images dir
         content:
@@ -79,6 +82,7 @@ paths:
       description: does a validation check on the provided path and if valid sets the cbor directory property of the SDKCore
       tags:
         - cbor-dir
+        - config-help
       requestBody:
         description: Contains the new path for the cbor dir
         content:
@@ -168,12 +172,47 @@ paths:
               schema:
                 type: string
       deprecated: false
-      security: []    
+      security: []
+  /api/gallery/upload-cbor-zip:
+    post:
+      summary: used to upload a zip file containing cbor format templates
+      operationId: uploadCborZip
+      description: using multipart format zip file can be uploaded, once uploaded it will be unzipped and the zip will be deleted. Successful response contains success message along with file path to unzipped folder. 
+      tags:
+      - cbor-dir
+      - config-help
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []
+
   /api/fingerprint:
     get:
       summary: get a status message about fingerprint SDKCore
       operationId: fingerprintStatus
       description: there is a SDKCore GetStatus() method and this will give a string containing some important information about the current sdk instance and the way its configured
+      tags:
+        - config-help
       responses:
         '200':
           description: Successful response
