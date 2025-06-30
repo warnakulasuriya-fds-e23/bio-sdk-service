@@ -17,7 +17,6 @@ func (controller *fingerprintController) identifyTemplate(c *gin.Context) {
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
 		return
 	}
-	// TODO: Add more error handling to sdk methods
 	probeTemplate, err := controller.sdk.ParseByteArrayToTemplate(&reqObj.ProbeCbor)
 	if err != nil {
 		err = fmt.Errorf("error occured when parsing probe byte data: %w", err)

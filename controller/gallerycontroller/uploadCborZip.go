@@ -2,7 +2,6 @@ package gallerycontroller
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -17,7 +16,6 @@ import (
 func (controller *galleryController) uploadCborZip(c *gin.Context) {
 	// single file
 	file, _ := c.FormFile("file")
-	log.Println(filepath.Ext(file.Filename))
 	if filepath.Ext(file.Filename) != ".zip" {
 		resObj := responseobjects.ErrorResObj{Message: "error only zip files can be uploaded to this endpoint "}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
