@@ -1,7 +1,11 @@
 package main
 
 import (
+	"log"
+	"os"
+
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/controller"
 	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/controller/fingerprintcontroller"
 	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/controller/gallerycontroller"
@@ -9,6 +13,16 @@ import (
 )
 
 func main() {
+	_, err := os.Stat(".env")
+	if err == nil {
+		log.Println("discovered .env file")
+		err := godotenv.Load()
+		if err != nil {
+			log.Println("however failed to load .env file")
+		} else {
+			log.Println(".env successfully loaded")
+		}
+	}
 	router := gin.Default()
 	sdkptr := initializer.Initializer()
 
