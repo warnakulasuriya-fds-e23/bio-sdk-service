@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/requestobjects"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/responseobjects"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/requestobjects"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/responseobjects"
 )
 
 func (controller *galleryController) updateCborDir(c *gin.Context) {

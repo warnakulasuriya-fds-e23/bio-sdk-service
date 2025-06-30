@@ -8,9 +8,9 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/configtomlreader"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/responseobjects"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/serverutilis"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/configtomlreader"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/responseobjects"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/serverutilis"
 )
 
 func (controller *galleryController) uploadCborZip(c *gin.Context) {

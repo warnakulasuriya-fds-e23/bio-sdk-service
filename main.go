@@ -6,10 +6,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/controller"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/controller/fingerprintcontroller"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/controller/gallerycontroller"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/initializer"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/controller"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/controller/fingerprintcontroller"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/controller/gallerycontroller"
+	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/initializer"
 )
 
 func main() {
