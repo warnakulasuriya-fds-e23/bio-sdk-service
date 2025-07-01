@@ -32,7 +32,7 @@ func (controller *fingerprintController) identifyTemplate(c *gin.Context) {
 		return
 	}
 
-	resObj := responseobjects.IdentifyTemplateResObje{
+	resObj := responseobjects.IdentifyTemplateResObj{
 		IsMatched:    isMatched,
 		DiscoveredId: discoveredId,
 	}
