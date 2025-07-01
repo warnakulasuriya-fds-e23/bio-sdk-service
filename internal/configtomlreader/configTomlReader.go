@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/BurntSushi/toml"
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/configuration"
+	"github.com/warnakulasuriya-fds-e23/bio-sdk-service/internal/configuration"
 )
 
 func ConfigTomlReader() configuration.Configuration {

@@ -3,7 +3,7 @@ package initializer
 import (
 	"log"
 
-	"github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server/internal/configtomlreader"
+	"github.com/warnakulasuriya-fds-e23/bio-sdk-service/internal/configtomlreader"
 	"github.com/warnakulasuriya-fds-e23/fingerprint-go-sdk/core"
 )
 

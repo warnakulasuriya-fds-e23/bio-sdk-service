@@ -1,4 +1,4 @@
-module github.com/warnakulasuriya-fds-e23/biometric-orchestration-go-server
+module github.com/warnakulasuriya-fds-e23/bio-sdk-service
 
 go 1.24.4
 
