@@ -13,6 +13,8 @@ tags:
     description: Related to the core fingerprint related functionalities offered by the SDKCore
   - name : triggers-a-go-routine
     description: indicates that a go routine will be started within the orchestration server to run a process seperate from the normal http request response cycle
+  - name : for-idp
+    description: indicates that these endpoints are to be called by an idp. For now either the WSO2 IS or Asgardeo is expected
 paths:
   /api/gallery/get-images-dir:
     get:
@@ -312,6 +314,34 @@ paths:
                 type: string
       deprecated: false
       security: []
+  /api/fingerping/authorize:
+    post:
+      summary: to act as the authenticate endpoint for the idp 
+      operationId: fingerprintTemplateAuthorize
+      description: is to utilize the identify functionality of the SDK Core and return a response that the idp would expect 
+      tags:
+        - for-idp
+      requestBody:
+        description: Contains data in the form that the idp provides
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.authorizeReqObj'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: false
+      security: []
 components:
   securitySchemes:
     default:
@@ -362,4 +392,61 @@ components:
         id:
           type: string
           example: testuser1
-    
+    models.authorizeReqObj:
+      type: object
+      properties:
+        actionType:
+          type: string
+          example: AUTHENTICATION
+        flowId:
+          type: string
+          example: 22598aab-b038-41db-9ef7-68bacd243947
+        event:
+          type: object
+          properties:
+            request:
+              type: object
+              properties:
+                additionalParams:
+                  type: array
+                  items: 
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: biometric-key
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: 1234556777
+            tenant:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "-1234"
+                name:
+                  type: string
+                  example: carbon.super
+            application:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: 874ecef7-4d29-45b9-b04d-988c043d2de4
+                name:
+                  type: string
+                  example: fingerprint-client
+            currentStepIndex:
+              type: integer
+              format: int32 
+              example: 1
+        allowedOperations:
+          type: array
+          items:
+            type: object
+            properties:
+              op:
+                type: string
+                example: redirect

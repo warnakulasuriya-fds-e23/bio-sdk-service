@@ -28,3 +28,6 @@ func (controller *fingerprintController) IdentifyTemplate(c *gin.Context) {
 func (controller *fingerprintController) EnrollTemplate(c *gin.Context) {
 	controller.enrollTemplate(c)
 }
+func (controller *fingerprintController) Authorize(c *gin.Context) {
+	controller.authorize(c)
+}
