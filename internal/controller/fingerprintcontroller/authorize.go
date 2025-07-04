@@ -66,7 +66,7 @@ func (controller *fingerprintController) authorize(c *gin.Context) {
 			ActionStatus: "SUCCESS",
 			Data: responseobjects.AuthorizeResObj_Data{
 				User: responseobjects.AthorizeResObj_User{
-					Id: "9f1ab106-ce85-46b1-8f41-6a071b54eb56",
+					Id: discoveredId,
 					Claims: []responseobjects.AuthorizeResObj_Claims{
 						{
 							Uri:   "http://wso2.org/claims/IsMatched",
