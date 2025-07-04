@@ -16,7 +16,11 @@ func (controller *fingerprintController) authorize(c *gin.Context) {
 	bodyBytes, err := io.ReadAll(c.Request.Body)
 	if err != nil {
 		err = fmt.Errorf("error occured when reading bytes of Request Body: %w", err)
-		resObj := responseobjects.ErrorResObj{Message: err.Error()}
+		resObj := responseobjects.AuthorizeErrorResObj500{
+			ActionStatus:     "ERROR",
+			ErrorMessage:     "ServerError",
+			ErrorDescription: "System encounter an error. bio sdk servie reports: " + err.Error(),
+		}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
 		return
 	}
@@ -26,35 +30,68 @@ func (controller *fingerprintController) authorize(c *gin.Context) {
 	decodedKey, err := base64.StdEncoding.DecodeString(biometricKey)
 	if err != nil {
 		err = fmt.Errorf("error while decoding recieved biometric key, make sure that key is base64 encoded : %w", err)
-		resObj := responseobjects.ErrorResObj{Message: err.Error()}
+		resObj := responseobjects.AuthorizeErrorResObj500{
+			ActionStatus:     "ERROR",
+			ErrorMessage:     "ServerError",
+			ErrorDescription: "System encounter an error. bio sdk servie reports: " + err.Error(),
+		}
 		c.IndentedJSON(http.StatusInternalServerError, resObj)
 		return
 	}
-	log.Println("biometric data:", string(decodedKey))
-
-	resObj := responseobjects.AuthorizeResObj{
-		ActionStatus: "SUCCESS",
-		Data: responseobjects.AuthorizeResObj_Data{
-			User: responseobjects.AthorizeResObj_User{
-				Id: "9f1ab106-ce85-46b1-8f41-6a071b54eb56",
-				Claims: []responseobjects.AuthorizeResObj_Claims{
-					{
-						Uri:   "http://wso2.org/claims/username",
-						Value: "emily",
+	probeTemplate, err := controller.sdk.ParseByteArrayToTemplate(&decodedKey)
+	if err != nil {
+		err = fmt.Errorf("error occured when parsing probe byte data: %w", err)
+		resObj := responseobjects.AuthorizeErrorResObj500{
+			ActionStatus:     "ERROR",
+			ErrorMessage:     "ServerError",
+			ErrorDescription: "System encounter an error. bio sdk servie reports: " + err.Error(),
+		}
+		c.IndentedJSON(http.StatusInternalServerError, resObj)
+		return
+	}
+	isMatched, discoveredId, err := controller.sdk.Identify(probeTemplate)
+	if err != nil {
+		err = fmt.Errorf("error occured when running sdk identify method for probe : %w", err)
+		resObj := responseobjects.AuthorizeErrorResObj500{
+			ActionStatus:     "ERROR",
+			ErrorMessage:     "ServerError",
+			ErrorDescription: "System encounter an error. bio sdk servie reports: " + err.Error(),
+		}
+		c.IndentedJSON(http.StatusInternalServerError, resObj)
+		return
+	}
+	log.Println("discover Id: ", discoveredId)
+	if isMatched {
+		resObj := responseobjects.AuthorizeResObj{
+			ActionStatus: "SUCCESS",
+			Data: responseobjects.AuthorizeResObj_Data{
+				User: responseobjects.AthorizeResObj_User{
+					Id: "9f1ab106-ce85-46b1-8f41-6a071b54eb56",
+					Claims: []responseobjects.AuthorizeResObj_Claims{
+						{
+							Uri:   "http://wso2.org/claims/IsMatched",
+							Value: fmt.Sprintf("%t", isMatched),
+						},
+						{
+							Uri:   "http://wso2.org/claims/DiscoveredID",
+							Value: discoveredId,
+						},
 					},
-					{
-						Uri:   "http://wso2.org/claims/emailaddress",
-						Value: "emily@aol.com",
+					UserStore: responseobjects.AuthorizeResObj_UserStore{
+						Id:   "UFJJTUFSWQ==",
+						Name: "PRIMARY",
 					},
-				},
-				UserStore: responseobjects.AuthorizeResObj_UserStore{
-					Id:   "UFJJTUFSWQ==",
-					Name: "PRIMARY",
 				},
 			},
-		},
+		}
+		c.IndentedJSON(http.StatusOK, resObj)
+	} else {
+		resObj := responseobjects.AuthorizeErrorResObj400{
+			ActionStatus:     "ERROR",
+			ErrorMessage:     "Unauthorized",
+			ErrorDescription: "Failed to authorize the request.",
+		}
+		c.IndentedJSON(http.StatusOK, resObj)
 	}
-
-	c.IndentedJSON(http.StatusOK, resObj)
 
 }
