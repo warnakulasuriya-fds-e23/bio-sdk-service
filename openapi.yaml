@@ -414,7 +414,7 @@ components:
                     properties:
                       name:
                         type: string
-                        example: biometric-key
+                        example: biometric-template
                       value:
                         type: array
                         items:

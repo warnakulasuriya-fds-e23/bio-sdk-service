@@ -26,8 +26,8 @@ func (controller *fingerprintController) authorize(c *gin.Context) {
 	}
 	recieved := gjson.ParseBytes(bodyBytes)
 	additionalParams := recieved.Get("event.request.additionalParams").Array()
-	biometricKey := additionalParams[0].Get("value").Array()[0].String()
-	decodedKey, err := base64.StdEncoding.DecodeString(biometricKey)
+	biometricTemplate := additionalParams[0].Get("value").Array()[0].String()
+	decodedKey, err := base64.StdEncoding.DecodeString(biometricTemplate)
 	if err != nil {
 		err = fmt.Errorf("error while decoding recieved biometric key, make sure that key is base64 encoded : %w", err)
 		resObj := responseobjects.AuthorizeErrorResObj500{
