@@ -59,7 +59,7 @@ func main() {
 	router.POST("/api/fingerprint/match", finController.MatchTemplates)
 	router.POST("/api/fingerprint/identify", finController.IdentifyTemplate)
 	router.POST("/api/fingerprint/enroll", finController.EnrollTemplate)
-	router.POST("/api/fingerping/authorize", finController.Authorize)
+	router.POST("/api/fingerprint/authorize", finController.Authorize)
 	// apparently in following way gin listens for 4000 on all network interfaces
 	router.Run(":4000")
 }
