@@ -314,7 +314,7 @@ paths:
                 type: string
       deprecated: false
       security: []
-  /api/fingerping/authorize:
+  /api/fingerprint/authorize:
     post:
       summary: to act as the authenticate endpoint for the idp 
       operationId: fingerprintTemplateAuthorize
